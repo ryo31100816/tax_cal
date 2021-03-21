@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    conf: {
+    conf: { //令和2年分
       and_over_65: '1956-01-01', under_65: '1956-01-02',
     },
     birth: '',
@@ -30,15 +30,24 @@ export default new Vuex.Store({
     getBirth: state => {
       return state.birth;
     },
+    getSyotoku: state => type => {
+      return state.syotoku[type];
+    },
   },
   mutations: {
     setBirth(state, birth) {
       state.birth = birth;
+    },
+    setSyotoku(state, { type, value }) {
+      state.syotoku[type] = value;
     }
   },
   actions: {
     readBirth({ commit }, birth) {
       commit('setBirth', birth);
+    },
+    readSyotoku({ commit }, { type, value }) {
+      commit('setSyotoku', { type: type, value: value });
     }
   }
 });
